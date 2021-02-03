@@ -1,0 +1,33 @@
+.icon-user{
+    border-radius:50%;
+}
+.nav-header.nav{
+    border-bottom:none !important;
+    border-top:1px solid #dee2e6!important;
+    width:100%;
+    display:flex;
+    justify-content:space-evenly;
+    flex-direction:row;
+
+}
+
+
+.nav-link.active{
+    padding: 1em 0.5em !important;
+    border: none;
+    color: black;
+    border-top: 1px solid black !important;
+    border-radius:0;
+    font-weight:700 !important;
+}
+.nav-link{
+    padding: 1em 0.5em;
+    font-size: 13px;
+    color: #8e8e8e;
+}
+.nav-link:hover{
+    color: black;
+    font-weight: 700 !important;
+    border:none !important;
+    outline: none !important;
+}
