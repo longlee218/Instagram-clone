@@ -22,12 +22,15 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="nanobar load-bar" id="loading" style="position: fixed;">
+        <div class="bar"></div>
+    </div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('svg/instagram.svg') }}" style="border-right: 2px solid; padding-right: 1rem" alt="Icon" class="pr-3">
-                    <span class="pl-3">Instagram</span>
+                    <img src="{{ asset('svg/1200px-Instagram_logo.svg (1).png') }}" style="border-right: 2px solid; padding-right: 1rem" alt="Icon" class="pr-3" width="15%">
+                    <span class="pl-3">Instagram-clone</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -52,24 +55,34 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-commenting-o fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-compass fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-heart-o fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
-                               <div style="display:flex;flex-direction:row; align-items:center;justify-content:center">
-                                   <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
-                                       <i class="fa fa-home fa-2x" aria-hidden="true"></i>
-                                   </a>
-                                   <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
-                                       <i class="fa fa-commenting-o fa-2x ml-3" aria-hidden="true"></i>
-                                   </a>
-                                   <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
-                                       <i class="fa fa-compass fa-2x ml-3" aria-hidden="true"></i>
-                                   </a>
-                                   <a id="" class="nav-link" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
-                                       <i class="fa fa-heart-o fa-2x ml-3" aria-hidden="true"></i>
-                                   </a>
                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="javascript:void(0)" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                       <img class="icon-user" src="https://instagram.fhan2-6.fna.fbcdn.net/v/t51.2885-19/s150x150/123577524_204559801236810_3862763870381019523_n.jpg?_nc_ht=instagram.fhan2-6.fna.fbcdn.net&_nc_ohc=raJ6jruax4gAX9wnSx2&tp=1&oh=216862f69b1082ca4decc9d50e452265&oe=603ACB73" alt="user" width="15%">
+                                       <img class="icon-user" src="{{ \Illuminate\Support\Facades\Auth::user()->profile->avatar }}" alt="user" width="60%">
                                    </a>
                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                       <a class="dropdown-item" href="{{ route('profile.show', \Illuminate\Support\Facades\Auth::id()) }}">
+                                           Trang cá nhân
+                                       </a>
                                        <a class="dropdown-item" href="{{ route('logout') }}"
                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -80,7 +93,6 @@
                                            @csrf
                                        </form>
                                    </div>
-                               </div>
                             </li>
                         @endguest
                     </ul>
@@ -109,5 +121,19 @@
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
+<script src="{{ asset('js/nanobar-master/nanobar.min.js') }}"></script>
+<script>
+    function f() {
+        let options = {
+            classname: 'load-bar',
+            id: 'loading'
+        };
+        let nanobar = new Nanobar( options );
+        nanobar.go( 30 );
+        nanobar.go( 76 );
+        nanobar.go(100);
+    }
+    f();
+</script>
 </html>
 @yield('script')

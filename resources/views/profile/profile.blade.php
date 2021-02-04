@@ -2,8 +2,8 @@
 @section("title", $user->username)
 @section('content')
     <style>
-        img:hover{
-            filter: grayscale(50%);
+        .img-post:hover{
+            filter: grayscale(100%);
         }
     </style>
     <div class="container" style="padding-left:2rem; padding-right:2rem">
@@ -18,7 +18,7 @@
                     <div class="p-3 col col-md-9" style="padding-left:1rem !important;">
                         <div class="header" style="display: flex; flex-direction:row; align-items:center;">
                             <h3>{{$user->profile->titles}}</h3>
-                            <a class="ml-5" href="javascript:void(0)"
+                            <a class="ml-5" href="{{ route('profile.edit', \Illuminate\Support\Facades\Auth::id()) }}"
                                style="border: 1px solid #dbdbdb; background-color: transparent; padding: 2px 10px; border-radius:3px; text-decoration: none; color: black">
                                 <strong>Chỉnh sửa trang cá nhân</strong></a>
                             <div class="dropdown">
@@ -74,48 +74,15 @@
                                     <h5 class="m-auto">Không có bài viết nào</h5>
                                 @endif
                                 @foreach($user->posts as $post)
-                                    <div class="col col-md-4">
+                                    <div class="col col-md-4 mb-4">
                                         @if(empty($post->picture))
                                             @continue
                                         @endif
-                                    <a href="#">
-                                        <img src="/storage/{{ $post->picture }}" class="w-100" >
+                                    <a href="javascript:void(0)" data-item="{{ $post->id }}" onclick="openPost(this)">
+                                        <img src="/storage/{{ $post->picture }}" class="w-100 img-post" >
                                     </a>
                                     </div>
                                 @endforeach
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/110157935_301447384391653_8150559747557080942_o.jpg?_nc_cat=110&ccb=2&_nc_sid=0debeb&_nc_ohc=UaZv9glQ_r0AX9FIM5s&_nc_ht=scontent.fhan2-4.fna&oh=96770df4848e11dd7d050addc071cf13&oe=60347967">--}}
-{{--                                </div>--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/110157935_301447384391653_8150559747557080942_o.jpg?_nc_cat=110&ccb=2&_nc_sid=0debeb&_nc_ohc=UaZv9glQ_r0AX9FIM5s&_nc_ht=scontent.fhan2-4.fna&oh=96770df4848e11dd7d050addc071cf13&oe=60347967">--}}
-{{--                                </div>--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/110157935_301447384391653_8150559747557080942_o.jpg?_nc_cat=110&ccb=2&_nc_sid=0debeb&_nc_ohc=UaZv9glQ_r0AX9FIM5s&_nc_ht=scontent.fhan2-4.fna&oh=96770df4848e11dd7d050addc071cf13&oe=60347967">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="row mt-4">--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/71322594_153899405813119_4751034102042329088_n.jpg?_nc_cat=105&ccb=2&_nc_sid=8bfeb9&_nc_ohc=f-Bp7Xy44U0AX_cN1Qw&_nc_ht=scontent.fhan2-4.fna&oh=df3bfff4cdba2fda933942fbef576e50&oe=60341000">--}}
-{{--                                </div>--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/71322594_153899405813119_4751034102042329088_n.jpg?_nc_cat=105&ccb=2&_nc_sid=8bfeb9&_nc_ohc=f-Bp7Xy44U0AX_cN1Qw&_nc_ht=scontent.fhan2-4.fna&oh=df3bfff4cdba2fda933942fbef576e50&oe=60341000">--}}
-{{--                                </div>--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/71322594_153899405813119_4751034102042329088_n.jpg?_nc_cat=105&ccb=2&_nc_sid=8bfeb9&_nc_ohc=f-Bp7Xy44U0AX_cN1Qw&_nc_ht=scontent.fhan2-4.fna&oh=df3bfff4cdba2fda933942fbef576e50&oe=60341000">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="row mt-4">--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/71311897_155669755636084_4345356165849284608_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8bfeb9&_nc_ohc=3pHAvOtAB9sAX-7wKx3&_nc_ht=scontent.fhan2-1.fna&oh=50bb43903733e59b804c76861a2ab381&oe=6037AD87">--}}
-{{--                                </div>--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/71311897_155669755636084_4345356165849284608_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8bfeb9&_nc_ohc=3pHAvOtAB9sAX-7wKx3&_nc_ht=scontent.fhan2-1.fna&oh=50bb43903733e59b804c76861a2ab381&oe=6037AD87">--}}
-{{--                                </div>--}}
-{{--                                <div class="col col-md-4">--}}
-{{--                                    <img class="w-100" src="https://scontent.fhan2-1.fna.fbcdn.net/v/t1.0-9/71311897_155669755636084_4345356165849284608_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8bfeb9&_nc_ohc=3pHAvOtAB9sAX-7wKx3&_nc_ht=scontent.fhan2-1.fna&oh=50bb43903733e59b804c76861a2ab381&oe=6037AD87">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                     </div>
@@ -134,6 +101,40 @@
                 success: function (data) {
                     $('#modal').empty().html(data);
                     $('#modalPost').modal('show');
+                }
+            })
+        }
+
+        {{--async function openPost(e){--}}
+        {{--    let url = '{{ route('post.show',':id') }}';--}}
+        {{--    url = url.replace(':id', $(e).attr('data-item'));--}}
+        {{--    let response = await fetch(url, {--}}
+        {{--        method: 'GET',--}}
+        {{--        contentType: 'text/html'--}}
+        {{--    });--}}
+        {{--    if (!response.ok){--}}
+        {{--        throw new Error(`Errors: ${response.status}`);--}}
+        {{--    }else {--}}
+        {{--        return await response.json();--}}
+        {{--    }--}}
+        {{--}--}}
+
+        {{--openPost().then(response =>{--}}
+        {{--    $('#modal').empty().html(response);--}}
+        {{--}).catch(e => {--}}
+        {{--    console.log(e);--}}
+        {{--})--}}
+        const openPost = (e) => {
+            let url = '{{ route('post.show', ':id') }}';
+            url = url.replace(':id', $(e).attr('data-item'));
+            f();
+            $.ajax({
+                url: url,
+                method: 'GET',
+                'Content-type': 'text/html',
+                success: function (response){
+                    $('#modal').empty().html(response);
+                    $('#modalDetail').modal('show')
                 }
             })
         }

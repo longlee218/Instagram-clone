@@ -12,11 +12,9 @@ class ProfileInfoController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
         //
-        $user = User::findOrFail($id);
-        return view('profile', ['user' => $user]);
     }
 
     /**
@@ -44,22 +42,26 @@ class ProfileInfoController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
         //
+        $user = User::findOrFail($id);
+        return view('profile.profile', ['user' => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($id)
     {
         //
+        $user = User::findOrFail($id);
+        return view('profile.edit', ['user' => $user]);
     }
 
     /**

@@ -31,3 +31,7 @@
     border:none !important;
     outline: none !important;
 }
+
+.load-bar.bar{
+    background:red;
+}
